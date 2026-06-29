@@ -1,0 +1,52 @@
+### Hyperspace API Tests
+# If you are using VS Code, you can install the "REST Client" extension
+# by Huachao Mao to run these requests directly from this file!
+
+@baseUrl = http://127.0.0.1:8787
+@email = testuser@example.com
+@password = supersecret123
+
+### 1. Check Server Health
+GET {{baseUrl}}/health
+
+### 2. Register a new user
+# @name register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
+
+### 3. Login to get JWT Token
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
+
+### -> NOTE: Copy the "token" from the login response and paste it below
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3Y2NmZmI2Zi04YTBhLTQ2YTMtODNhZC00ODI3OWI1MWI2ZmQiLCJleHAiOjE3ODMzNDI3NDZ9.qdJMVVPaTYOxznQiDyTsvEyVeP3CibvMiVbrZ4q77h8
+
+### 4. Create a Private Journal Entry
+POST {{baseUrl}}/api/entries
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "content": "This is my very first journal entry! I'm building Hyperspace.",
+    "is_public": true,
+    "mood": "excited",
+    "location": "Earth"
+}
+
+### 5. Fetch all my Private Entries
+GET {{baseUrl}}/api/entries
+Authorization: Bearer {{authToken}}
+
+### 6. Fetch Public Entries (Website view)
+GET {{baseUrl}}/api/public/entries
