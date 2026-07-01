@@ -122,3 +122,15 @@ function constantTimeCompare(a: string, b: string): boolean {
   }
   return result === 0;
 }
+
+/**
+ * Hashes an API Key using SHA-256.
+ *
+ * @param {string} key - The raw API key.
+ * @returns {Promise<string>} The SHA-256 hex string.
+ */
+export async function hashApiKey(key: string): Promise<string> {
+  const msgUint8 = new TextEncoder().encode(key);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+  return bufferToHex(new Uint8Array(hashBuffer));
+}

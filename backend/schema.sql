@@ -17,3 +17,11 @@ CREATE TABLE IF NOT EXISTS entries (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
+
+-- API Keys Table
+CREATE TABLE IF NOT EXISTS api_keys (
+    key_hash TEXT PRIMARY KEY,
+    user_id TEXT UNIQUE NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);

@@ -50,3 +50,16 @@ Authorization: Bearer {{authToken}}
 
 ### 6. Fetch Public Entries (Website view)
 GET {{baseUrl}}/api/public/entries
+
+### 7. Generate a new Developer API Key
+# Requires you to be logged in (uses the authToken)
+POST {{baseUrl}}/api/auth/keys
+Authorization: Bearer {{authToken}}
+
+### -> NOTE: Copy the "rawKey" from the response above and paste it below
+@apiKey = hyp_PASTEYOURKEYHERE
+
+### 8. Fetch SDK Entries using your Secret API Key!
+# This is what the NPM package / Developer Portfolios will call
+GET {{baseUrl}}/api/public/sdk/entries
+Authorization: Bearer {{apiKey}}

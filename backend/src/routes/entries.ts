@@ -5,6 +5,7 @@
  */
 import { Hono } from 'hono'
 import { jwt } from 'hono/jwt'
+import { Redis } from '@upstash/redis/cloudflare'
 import type { AppEnv, JwtPayload } from '../types'
 
 const entriesRouter = new Hono<AppEnv>()
@@ -77,6 +78,17 @@ entriesRouter.post('/', async (c) => {
       'SELECT * FROM entries WHERE id = ?'
     ).bind(entryId).first()
 
+    // Invalidate Redis cache for this user
+    try {
+      const redis = new Redis({
+        url: c.env.UPSTASH_REDIS_REST_URL,
+        token: c.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+      await redis.del(`sdk_entries_${userId}`)
+    } catch (e) {
+      console.error('Failed to invalidate cache:', e)
+    }
+
     return c.json({ entry: newEntry }, 201)
   } catch (error) {
     return c.json({ error: 'Failed to create entry' }, 500)
@@ -146,6 +158,17 @@ entriesRouter.put('/:id', async (c) => {
       'SELECT * FROM entries WHERE id = ?'
     ).bind(entryId).first()
 
+    // Invalidate Redis cache for this user
+    try {
+      const redis = new Redis({
+        url: c.env.UPSTASH_REDIS_REST_URL,
+        token: c.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+      await redis.del(`sdk_entries_${userId}`)
+    } catch (e) {
+      console.error('Failed to invalidate cache:', e)
+    }
+
     return c.json({ entry: updatedEntry })
   } catch (error) {
     return c.json({ error: 'Failed to update entry' }, 500)
@@ -179,6 +202,17 @@ entriesRouter.delete('/:id', async (c) => {
     await c.env.DB.prepare(
       'DELETE FROM entries WHERE id = ?'
     ).bind(entryId).run()
+
+    // Invalidate Redis cache for this user
+    try {
+      const redis = new Redis({
+        url: c.env.UPSTASH_REDIS_REST_URL,
+        token: c.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+      await redis.del(`sdk_entries_${userId}`)
+    } catch (e) {
+      console.error('Failed to invalidate cache:', e)
+    }
 
     return c.json({ message: 'Entry deleted successfully' })
   } catch (error) {

@@ -11,6 +11,10 @@ export type Bindings = {
   DB: D1Database
   /** The secret key used for signing and verifying JWTs */
   JWT_SECRET: string
+  /** Upstash Redis REST API URL */
+  UPSTASH_REDIS_REST_URL: string
+  /** Upstash Redis REST API Token */
+  UPSTASH_REDIS_REST_TOKEN: string
 }
 
 /**

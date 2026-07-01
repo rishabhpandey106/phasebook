@@ -3,9 +3,9 @@
  * Handles user registration and secure login via JWT.
  */
 import { Hono } from 'hono'
-import { sign } from 'hono/jwt'
-import { hashPassword, verifyPassword } from '../utils/crypto'
-import type { AppEnv } from '../types'
+import { sign, jwt } from 'hono/jwt'
+import { hashPassword, verifyPassword, hashApiKey } from '../utils/crypto'
+import type { AppEnv, JwtPayload } from '../types'
 
 const authRouter = new Hono<AppEnv>()
 
@@ -93,6 +93,43 @@ authRouter.post('/login', async (c) => {
 
   } catch (error) {
     return c.json({ error: 'Internal server error' }, 500)
+  }
+})
+
+/**
+ * @route POST /api/auth/keys
+ * @description Generates a new API Key for the authenticated user. Replaces any existing key.
+ * @returns { rawKey } on success
+ */
+authRouter.post('/keys', async (c, next) => {
+  // Apply JWT middleware dynamically for this specific route
+  const jwtMiddleware = jwt({
+    secret: c.env.JWT_SECRET,
+    alg: 'HS256'
+  })
+  return jwtMiddleware(c, next)
+}, async (c) => {
+  const payload = c.get('jwtPayload') as JwtPayload
+  const userId = payload.sub
+
+  try {
+    // 1. Generate secure random key
+    const rawKey = `hyp_${crypto.randomUUID().replace(/-/g, '')}${crypto.randomUUID().replace(/-/g, '')}`
+    
+    // 2. Hash the key for storage
+    const keyHash = await hashApiKey(rawKey)
+    const now = new Date().toISOString()
+
+    // 3. Upsert the key into D1 (since user_id is UNIQUE, we use ON CONFLICT REPLACE to ensure only 1 active key)
+    await c.env.DB.prepare(
+      `INSERT INTO api_keys (key_hash, user_id, created_at) 
+       VALUES (?, ?, ?) 
+       ON CONFLICT(user_id) DO UPDATE SET key_hash = excluded.key_hash, created_at = excluded.created_at`
+    ).bind(keyHash, userId, now).run()
+
+    return c.json({ rawKey }, 201)
+  } catch (error) {
+    return c.json({ error: 'Failed to generate API Key' }, 500)
   }
 })
 
