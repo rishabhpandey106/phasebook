@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  --theme-bg: #FFFFFF;
+  --theme-fg: #000000;
+  --theme-gray-100: #f3f4f6;
+  --theme-gray-500: #6b7280;
+  --theme-red-100: #fee2e2;
+  --theme-red-700: #b91c1c;
+  --theme-red-900: #7f1d1d;
+  --theme-shadow: #000000;
+}
+
+.dark {
+  --theme-bg: #000000;
+  --theme-fg: #FFFFFF;
+  --theme-gray-100: #1f2937;
+  --theme-gray-500: #9ca3af;
+  --theme-red-100: #450a0a;
+  --theme-red-700: #ef4444;
+  --theme-red-900: #fca5a5;
+  --theme-shadow: #FFFFFF;
+}
+
+@theme {
+  --color-white: var(--theme-bg);
+  --color-black: var(--theme-fg);
+  --color-gray-100: var(--theme-gray-100);
+  --color-gray-500: var(--theme-gray-500);
+  --color-red-100: var(--theme-red-100);
+  --color-red-700: var(--theme-red-700);
+  --color-red-900: var(--theme-red-900);
+
+  --color-primary: var(--theme-fg);
+  --color-secondary: var(--theme-gray-500);
+  --color-surface: var(--theme-bg);
+  
+  --font-display: "JetBrains Mono", monospace;
+  --font-body: "JetBrains Mono", monospace;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-handwriting: "Caveat", cursive;
+
+  /* Brutalist utilities */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 0px;
+}
+
+@layer base {
+  * {
+    border-radius: 0 !important;
+    transition: none !important;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+}
+
+@layer utilities {
+  .shadow-brutal-sm {
+    box-shadow: 2px 2px 0 0 var(--theme-shadow);
+  }
+  .shadow-brutal-md {
+    box-shadow: 4px 4px 0 0 var(--theme-shadow);
+  }
+  .shadow-brutal-lg {
+    box-shadow: 6px 6px 0 0 var(--theme-shadow);
+  }
+  .shadow-brutal-xl {
+    box-shadow: 8px 8px 0 0 var(--theme-shadow);
+  }
+
+  .bg-paper {
+    background-color: #F9F6EE;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+}
