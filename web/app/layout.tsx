@@ -4,12 +4,34 @@ import { ThemeProvider } from "../components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://phasebook.itsrishabh.tech"),
   title: "Phasebook - 3D Interactive Journal",
   description: "A hardware-accelerated 3D interactive book and live journaling platform.",
+    keywords: [
+    "Phasebook",
+    "3D Interactive Journal",
+    "Live Journaling Platform",
+    "phasebook package",
+    "phasebook SDK",
+    "phasebook API",
+    "phasebook interactive book",
+    "phasebook journal",
+    "phasebook rishabh",
+    "phasebook hyperspace",
+    "npm phasebook",
+    "phasebook react",
+    "phasebook nextjs",
+    "phasebook portfolio",
+    "phasebook web app",
+    "phasebook mobile app",
+    "phasebook open source",
+    "phasebook github",
+    "phasebook documentation",
+  ],
   openGraph: {
     title: "Phasebook",
     description: "A hardware-accelerated 3D interactive book and live journaling platform.",
-    url: "https://phasebook.vercel.app",
+    url: "https://phasebook.itsrishabh.tech",
     siteName: "Phasebook",
     images: [
       {
@@ -27,6 +49,25 @@ export const metadata: Metadata = {
     title: "Phasebook",
     description: "A hardware-accelerated 3D interactive book and live journaling platform.",
     images: ["/og-image.png"],
+  },
+   verification: {
+    google: [
+      "aFgROXjTSznluBIsgPA92-NGAd3oJX-txnsvHaxRP2U",
+    ]
+  },
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
