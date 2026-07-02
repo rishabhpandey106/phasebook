@@ -233,8 +233,8 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between font-bold uppercase text-xs text-[#555555] tracking-widest">
-          <p>&copy; {new Date().getFullYear()} Phasebook Systems. All rights reserved.</p>
-          <p>Designed strictly per DESIGN.md</p>
+          <p>&copy; {new Date().getFullYear()} Phasebook Systems</p>
+          <p>All rights reserved</p>
         </div>
       </footer>
 
