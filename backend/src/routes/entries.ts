@@ -56,15 +56,6 @@ entriesRouter.post('/', async (c) => {
   }
 
   try {
-    // Check if an entry already exists for this user today (UTC date)
-    const existingToday = await c.env.DB.prepare(
-      "SELECT id FROM entries WHERE user_id = ? AND date(created_at) = date('now')"
-    ).bind(userId).first()
-
-    if (existingToday) {
-      return c.json({ error: 'You have already created an entry for today. Please edit your existing entry.' }, 409)
-    }
-
     const entryId = crypto.randomUUID()
     const now = new Date().toISOString()
 
