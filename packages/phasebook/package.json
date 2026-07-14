@@ -1,6 +1,6 @@
 {
   "name": "phasebook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Interactive 3D book component for React",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -15,12 +15,10 @@
       "require": "./dist/server.js",
       "import": "./dist/server.mjs",
       "types": "./dist/server.d.ts"
-    },
-    "./styles.css": "./dist/styles.css",
-    "./dist/styles.css": "./dist/styles.css"
+    }
   },
   "scripts": {
-    "build": "tsup src/index.tsx --clean --format cjs,esm --dts --no-splitting --external react,react-dom,framer-motion,lucide-react && tsup src/server.tsx --format cjs,esm --dts --no-splitting --external react,react-dom,framer-motion,lucide-react,./index && tailwindcss -i src/styles.css -o dist/styles.css",
+    "build": "tsup src/index.tsx --clean --format cjs,esm --dts --no-splitting --external react,react-dom,framer-motion,lucide-react && tsup src/server.tsx --format cjs,esm --dts --no-splitting --external react,react-dom,framer-motion,lucide-react,./index",
     "dev": "npm run build"
   },
   "peerDependencies": {

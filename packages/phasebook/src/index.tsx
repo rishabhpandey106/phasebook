@@ -5,6 +5,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from './utils';
 import { ChevronLeft, ChevronRight, RefreshCcw, X, BookOpen } from 'lucide-react';
 
+const injectedCSS = `
+.bg-paper {
+  background-color: #F9F6EE;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+}
+.book-scrollbar::-webkit-scrollbar { width: 6px; }
+.book-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.book-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.15); border-radius: 10px; }
+.book-scrollbar::-webkit-scrollbar-thumb:hover { background-color: rgba(0, 0, 0, 0.3); }
+.book-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.15) transparent; }
+`;
+
 export interface BookPage {
     title?: string;
     content: React.ReactNode;
@@ -90,6 +102,8 @@ export default function InteractiveBook({
     }, [isOpen, currentPageIndex]);
 
     return (
+        <>
+        <style dangerouslySetInnerHTML={{ __html: injectedCSS }} />
         <div
             className={cn("relative flex items-center justify-center perspective-[2000px] w-full h-full min-h-[500px]", className)}
         >
@@ -327,6 +341,7 @@ export default function InteractiveBook({
                 </motion.div>
             )}
         </div>
+        </>
     );
 }
 

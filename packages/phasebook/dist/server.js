@@ -26,7 +26,7 @@ var import_index = require("./index");
 var import_jsx_runtime = require("react/jsx-runtime");
 async function HyperspaceJournal({
   apiKey,
-  baseUrl = "http://127.0.0.1:8787",
+  baseUrl = "https://hyperspace-backend.herokanon39.workers.dev",
   coverImage,
   bookTitle,
   bookAuthor,
