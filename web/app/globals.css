@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@source "../node_modules/phasebook";
 :root {
   --theme-bg: #FFFFFF;
   --theme-fg: #000000;

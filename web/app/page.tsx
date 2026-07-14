@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { Button } from '../components/Button';
 import { ArrowRight, Database, Lock, Terminal, Layout, Blocks } from 'lucide-react';
 import { JournalBook } from 'phasebook';
-import 'phasebook/styles.css';
 
 export default function LandingPage() {
   const demoEntries = [

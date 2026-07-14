@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ArrowLeft, Code, Database, Terminal, Copy, Check, Eye } from 'lucide-react';
 import { Button } from '../../components/Button';
 import { JournalBook } from 'phasebook';
-import 'phasebook/styles.css';
 
 function CopyButton({ text, dark = false }: { text: string, dark?: boolean }) {
   const [copied, setCopied] = useState(false);
@@ -107,13 +106,28 @@ export default function DevelopersPage() {
               </p>
             </div>
 
-            <div className="space-y-2">
-              <div className="font-bold uppercase tracking-widest text-sm flex items-center gap-2">
-                <Terminal size={16} /> Installation
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <div className="font-bold uppercase tracking-widest text-sm flex items-center gap-2">
+                  <Terminal size={16} /> 1. Installation
+                </div>
+                <div className="bg-neutral-100 p-4 border-2 border-black font-mono text-sm overflow-x-auto flex items-center justify-between">
+                  <code>npm install phasebook</code>
+                  <CopyButton text="npm install phasebook" />
+                </div>
               </div>
-              <div className="bg-neutral-100 p-4 border-2 border-black font-mono text-sm overflow-x-auto flex items-center justify-between">
-                <code>npm install phasebook</code>
-                <CopyButton text="npm install phasebook" />
+
+              <div className="space-y-2">
+                <div className="font-bold uppercase tracking-widest text-sm flex items-center gap-2">
+                  <Code size={16} /> 2. Tailwind CSS Configuration
+                </div>
+                <p className="text-sm font-bold uppercase tracking-widest text-neutral-500 mb-2">
+                  Add this line to your main CSS file so Tailwind generates the styles. No CSS import required!
+                </p>
+                <div className="bg-neutral-100 p-4 border-2 border-black font-mono text-sm overflow-x-auto flex items-center justify-between">
+                  <code>@source "../node_modules/phasebook";</code>
+                  <CopyButton text='@source "../node_modules/phasebook";' />
+                </div>
               </div>
             </div>
 
@@ -124,7 +138,6 @@ export default function DevelopersPage() {
               <div className="relative">
                 <div className="absolute top-4 right-4">
                   <CopyButton dark text={`import { HyperspaceJournal } from "phasebook/server";
-import "phasebook/styles.css";
 
 export default function MyBlog() {
   return (
@@ -142,7 +155,6 @@ export default function MyBlog() {
                 </div>
                 <pre className="bg-neutral-900 text-neutral-100 p-6 pt-12 border-2 border-black font-mono text-sm overflow-x-auto leading-relaxed shadow-inner">
 <code>{`import { HyperspaceJournal } from "phasebook/server";
-import "phasebook/styles.css";
 
 export default function MyBlog() {
   return (
@@ -188,7 +200,6 @@ export default function MyBlog() {
                 <div className="absolute top-4 right-4">
                   <CopyButton dark text={`import { useEffect, useState } from "react";
 import { JournalBook } from "phasebook";
-import "phasebook/styles.css";
 
 export default function MyReactApp() {
   const [entries, setEntries] = useState([]);
@@ -211,7 +222,6 @@ export default function MyReactApp() {
                 <pre className="bg-neutral-900 text-neutral-100 p-6 pt-12 border-2 border-black font-mono text-sm overflow-x-auto leading-relaxed shadow-inner">
 <code>{`import { useEffect, useState } from "react";
 import { JournalBook } from "phasebook";
-import "phasebook/styles.css";
 
 export default function MyReactApp() {
   const [entries, setEntries] = useState([]);
@@ -261,7 +271,6 @@ export default function MyReactApp() {
               <div className="relative">
                 <div className="absolute top-4 right-4">
                   <CopyButton dark text={`import { InteractiveBook } from "phasebook";
-import "phasebook/styles.css";
 
 export default function CustomBook() {
   const pages = [
@@ -286,7 +295,6 @@ export default function CustomBook() {
                 </div>
                 <pre className="bg-neutral-900 text-neutral-100 p-6 pt-12 border-2 border-black font-mono text-sm overflow-x-auto leading-relaxed shadow-inner">
 <code>{`import { InteractiveBook } from "phasebook";
-import "phasebook/styles.css";
 
 export default function CustomBook() {
   const pages = [

@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Header */}
       <header className="border-b-4 border-black px-4 sm:px-8 py-6 flex justify-between items-center gap-4">
         <div className="min-w-0">
-          <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter">Phasebook</h1>
+          <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter"><a href="/">Phasebook</a></h1>
           <p className="text-xs sm:text-sm font-bold uppercase tracking-widest mt-1 truncate max-w-[150px] sm:max-w-none text-secondary">
             {user.email}
           </p>
